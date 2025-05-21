@@ -43,25 +43,23 @@
 
         const $ulList = document.querySelector('#root ul')
 
-        const myLiElement = document.createElement('li');
-        myLiElement.textContent = 'TEST';
+        // Factory Function
+        function createLiElement(text = 'TEST', backgroundColor = '') {
+            const myLiElement = document.createElement('li');
+            myLiElement.textContent = text;
+            myLiElement.style.backgroundColor = backgroundColor;
 
-        $ulList.appendChild(myLiElement);
+            return myLiElement;
+        }
 
-        const myLiElement2 = document.createElement('li');
-        myLiElement2.textContent = 'TEST';
+        $ulList.appendChild(createLiElement());
+        $ulList.appendChild(createLiElement());
 
-        $ulList.appendChild(myLiElement2);
-        
         $ulList.append('--------------')
 
-        const myLiElement3 = document.createElement('li');
-        myLiElement3.textContent = 'TEST';
-        $ulList.appendChild(myLiElement3);
+        $ulList.appendChild(createLiElement('mój 2'));
+        $ulList.appendChild(createLiElement('domek', 'red'));
 
-        const myLiElement4 = document.createElement('li');
-        myLiElement4.textContent = 'TEST';
-        $ulList.appendChild(myLiElement4);
         console.log('!')
     </script>
 </body>
