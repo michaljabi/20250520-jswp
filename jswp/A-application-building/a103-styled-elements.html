@@ -58,20 +58,27 @@
          * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information#modify_an_element_style
          * */
 
+        function adaptToClassName(arrayOrString) {
+            if (typeof arrayOrString === 'string') {
+                return arrayOrString;
+            } else if (Array.isArray(arrayOrString)) {
+                return arrayOrString.join(' ');
+            }
+            return '';
+        }
+
+        function elementList(elementOrArray) {
+            return Array.isArray(elementOrArray) ? elementOrArray : [elementOrArray]
+        }
+
 
         function createElement(elementTAG, children = [], styles = '') {
             const element = document.createElement(elementTAG);
-            if (typeof children === 'string') {
-                element.append(children)
-            } else {
-                element.append(...children);
-            }
 
-            if (typeof styles === 'string') {
-                element.className = styles;
-            } else if (Array.isArray(styles)) {
-                element.className = styles.join(' ');
-            } else if (styles instanceof Object) {
+            element.append(...elementList(children))
+            element.className = adaptToClassName(styles);
+
+            if (styles instanceof Object) {
                 for (const key in styles) {
                     element.style[key] = styles[key]
                 }
@@ -81,9 +88,11 @@
         }
 
         const div = (elements, styles) => createElement('div', elements, styles);
+        const h1 = (elements) => createElement('h1', elements);
 
         const mainDiv = div([
-            div(['to jest'], 'text-red'),
+            div(h1('hello'), 'text-red'),
+            div('hello'),
             div(['prosty'], ['text-blue', 'text-center']),
             div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' })
         ]);
