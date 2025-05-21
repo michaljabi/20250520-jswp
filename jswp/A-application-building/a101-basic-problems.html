@@ -47,9 +47,22 @@
         myLiElement.textContent = 'TEST';
 
         $ulList.appendChild(myLiElement);
-        $ulList.appendChild(myLiElement);
-        $ulList.appendChild(myLiElement);
-        $ulList.appendChild(myLiElement);
+
+        const myLiElement2 = document.createElement('li');
+        myLiElement2.textContent = 'TEST';
+
+        $ulList.appendChild(myLiElement2);
+        
+        $ulList.append('--------------')
+
+        const myLiElement3 = document.createElement('li');
+        myLiElement3.textContent = 'TEST';
+        $ulList.appendChild(myLiElement3);
+
+        const myLiElement4 = document.createElement('li');
+        myLiElement4.textContent = 'TEST';
+        $ulList.appendChild(myLiElement4);
+        console.log('!')
     </script>
 </body>
 
