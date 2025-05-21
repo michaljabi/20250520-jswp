@@ -62,16 +62,17 @@
         const ul = (elements) => createElement('ul', elements);
         const li = (elements) => createElement('li', elements);
 
-        function buildDiv(title = 'Tytuł mojej strony', items = []) {
+        function buildDiv(title = 'Tytuł mojej strony', items = ['pusty']) {
 
-            const itemsRef = []
-            for (const item of items) {
-                itemsRef.push(li(item))
-            }
+            // const itemsRef = []
+            // for (const item of items) {
+            //     itemsRef.push(li(item))
+            // }
 
             return div([
                 h1(title),
-                ul(itemsRef),
+                // ul(items.map(li)),
+                ul(items.map(text => li(text))),
             ]);
         }
 
