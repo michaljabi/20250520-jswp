@@ -11,7 +11,7 @@
  */
 
 
-const users= [
+const users = [
   {
     name: 'Janusz',
     age: 41,
@@ -53,12 +53,53 @@ console.log(averageAge);
 
 // oto nasze pure functions:
 const isItPerson = (user) => user.professionId === 3;
-const getAge = (user) => user.age;
+
+
+const pluckField = (fieldName) => (obj) => obj[fieldName];
+
+console.log((() => { }) instanceof Function)
+console.log((() => { }) instanceof Object)
+
+// const getAge = (user) => user.age;
+const getAge = pluckField('age');
 const sum = (a = 0, b = 0) => a + b;
 
+console.log(getAge({ age: 365 }, 'age'))
+console.log(getAge({ profession: 'Kierowca' }, 'profession'));
+
+// const pluckField = (fieldName) => {
+//   console.log(fieldName);
+//   return (obj) => obj[fieldName]
+// }
+
+
+
+pluckField('age')({ age: 65 }); //=
+
+/*
+console.log({ age: 65 }['age'])
+
+const myObj = { age: 12 };
+const field = 'age';
+
+console.log(myObj[field]);
+*/
+
 const allITPerson2 = users.filter(isItPerson);
+
+const addTwo = (n) => n + 2;
+
+const pluckAgeAndMapToOne = (obj) => addTwo(pluckField('age')(obj));
+// -> functional with Ramda (.pipe)
+// https://ramdajs.com/docs/#pipe
+
+console.log(users.filter(isItPerson).map(pluckField('age')).map(addTwo));
+console.log(users.filter(isItPerson).map(pluckAgeAndMapToOne));
+
 const averageAge2 = allITPerson2.map(getAge).reduce(sum, 0) / allITPerson2.length;
+const averageAge3 = allITPerson2.map(pluckField('age')).reduce(sum, 0) / allITPerson2.length;
 
 console.log(averageAge2);
+console.log(averageAge3);
 
-export {};
+export { };
