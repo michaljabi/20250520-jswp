@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <!-- <h2 title="now you see me">test</h2> -->
     <main id="root"></main>
     <script>
         /**
@@ -58,6 +59,16 @@
          * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information#modify_an_element_style
          * */
 
+        //1st mutatation
+        const obj = { a: 1 };
+        console.log('before', obj)
+        console.log(Object.assign(obj, { b: 2 }))
+        console.log({ a: 1, ...{ b: 2 } })
+        console.log('after', obj)
+        // 2nd shallow copy
+        console.log(Object.assign({}, { a: 1 }, { b: 2 }))
+        console.log({ ...{ a: 1 }, ...{ b: 2 } })
+
         function adaptToClassName(arrayOrString) {
             if (typeof arrayOrString === 'string') {
                 return arrayOrString;
@@ -72,21 +83,27 @@
         }
 
         function decorateWithStyle(element, styles) {
-            if (styles && styles instanceof Object) {
-                for (const key in styles) {
-                    // o nie ! mutacja (ale to nas nie przejmuje tutaj)
-                    element.style[key] = styles[key]
-                }
+            if (styles && !Array.isArray(styles) && styles instanceof Object) {
+                // console.log(styles);
+                // for (const key in styles) {
+                //     // o nie ! mutacja (ale to nas nie przejmuje tutaj)
+                //     element.style[key] = styles[key]
+                // }
+                // console.log(styles.constructor.name);
+                // console.log(element.style.constructor.name);
+                Object.assign(element.style, styles)
             }
             return element;
         }
 
 
-        function createElement(elementTAG, children = [], styles = '') {
+        function createElement(elementTAG, children = [], classes = '') {
             const element = document.createElement(elementTAG);
 
             element.append(...elementList(children))
-            element.className = adaptToClassName(styles);
+            if (classes) {
+                element.className = adaptToClassName(classes);
+            }
 
             // if (styles instanceof Object) {
             //     for (const key in styles) {
@@ -94,17 +111,17 @@
             //     }
             // }
 
-            return decorateWithStyle(element, styles);
+            return element;
         }
 
-        const div = (elements, styles) => createElement('div', elements, styles);
-        const h1 = (elements) => createElement('h1', elements);
+        const div = (elements, styles/*, attributes = {}*/) => decorateWithStyle(createElement('div', elements, styles), styles);
+        const h1 = (elements, styles) => createElement('h1', elements, styles);
 
         const mainDiv = div([
             div(h1('hello'), 'text-red'),
             div('hello'),
             div(['prosty'], ['text-blue', 'text-center']),
-            div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' })
+            div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' }/*, { styles: {}, id: '', title: '' }*/)
         ]);
 
         const $root = document.getElementById('root');
