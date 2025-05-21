@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>A103 - Styled Elments</title>
@@ -7,14 +8,17 @@
         .text-red {
             color: darkred;
         }
+
         .text-blue {
             color: blue;
         }
+
         .text-center {
             text-align: center;
         }
     </style>
 </head>
+
 <body>
     <main id="root"></main>
     <script>
@@ -54,14 +58,39 @@
          * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information#modify_an_element_style
          * */
 
-         const mainDiv = div([
-	         div(['to jest'], 'text-red'),
-	         div(['prosty'], ['text-blue', 'text-center']),
-	         div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' } )
-         ]);
 
-         const $root = document.getElementById('root');
-         $root.appendChild(mainDiv);
+        function createElement(elementTAG, children = [], styles = '') {
+            const element = document.createElement(elementTAG);
+            if (typeof children === 'string') {
+                element.append(children)
+            } else {
+                element.append(...children);
+            }
+
+            if (typeof styles === 'string') {
+                element.className = styles;
+            } else if (Array.isArray(styles)) {
+                element.className = styles.join(' ');
+            } else if (styles instanceof Object) {
+                for (const key in styles) {
+                    element.style[key] = styles[key]
+                }
+            }
+
+            return element;
+        }
+
+        const div = (elements, styles) => createElement('div', elements, styles);
+
+        const mainDiv = div([
+            div(['to jest'], 'text-red'),
+            div(['prosty'], ['text-blue', 'text-center']),
+            div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' })
+        ]);
+
+        const $root = document.getElementById('root');
+        $root.appendChild(mainDiv);
     </script>
 </body>
+
 </html>
