@@ -26,13 +26,16 @@ const cashService = {
 
 const cashServiceAuth = {
 	userAuth: false,
-	getMyCash () {
-		if(!this.userAuth) {
+	getMyCash() {
+		if (!this.userAuth) {
 			throw new Error('Unauthorized!')
 		}
 		return cashService.getMyCash();
 	}
 }
+
+// 
+console.log(cashService.getMyCash());
 
 const cashAmount = cashServiceAuth.getMyCash();
 console.log(cashAmount);

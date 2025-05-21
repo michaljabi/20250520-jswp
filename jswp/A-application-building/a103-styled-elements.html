@@ -117,11 +117,33 @@
         const div = (elements, styles/*, attributes = {}*/) => decorateWithStyle(createElement('div', elements, styles), styles);
         const h1 = (elements, styles) => createElement('h1', elements, styles);
 
+        const user = {
+            isAuth: true
+        }
+        /*
+            Nie zmieniając implementacji div dodaj pełnomocnika:
+
+            1. renderIfAuth(element)
+             
+            przyjmuje on element do renderowania i albo go zwraca, jeśli zalogowany
+            albo zwraca "musisz się zalogować żeby to zobaczyć"
+        */
+
+        // Proxy - zmienia strukturę docelową w zależności od warunków (zewnętrznych)
+        function renderIfAuth(element) {
+            if (user.isAuth) {
+                return element;
+            }
+            return "musisz się zalogować żeby to zobaczyć"
+        }
+
         const mainDiv = div([
             div(h1('hello'), 'text-red'),
             div('hello'),
             div(['prosty'], ['text-blue', 'text-center']),
-            div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' }/*, { styles: {}, id: '', title: '' }*/)
+            renderIfAuth(
+                div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' }/*, { styles: {}, id: '', title: '' }*/)
+            )
         ]);
 
         const $root = document.getElementById('root');
