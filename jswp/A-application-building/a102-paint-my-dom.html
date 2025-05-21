@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>A102 Paint my DOM!</title>
 </head>
+
 <body>
     <main id="root"></main>
     <script>
@@ -44,18 +46,35 @@
          * https://developer.mozilla.org/en-US/docs/Web/API/Element/append
          * */
 
-         const mainDiv = div([
-	        h1('Tytuł mojej strony'),
-	        ul([
-		        li('To'),
-	            li('Jest'),
-	            li('Kolejny'),
+
+        function createElement(elementTAG, children = []) {
+            const element = document.createElement(elementTAG);
+            if (typeof children === 'string') {
+                element.append(children)
+            } else {
+                element.append(...children);
+            }
+            return element;
+        }
+
+        const div = (elements) => createElement('div', elements);
+        const h1 = (elements) => createElement('h1', elements);
+        const ul = (elements) => createElement('ul', elements);
+        const li = (elements) => createElement('li', elements);
+
+        const mainDiv = div([
+            h1('Tytuł mojej strony'),
+            ul([
+                li('To'),
+                li('Jest'),
+                li('Kolejny'),
                 li('Test'),
             ]),
-         ]);
+        ]);
 
-         const $root = document.getElementById('root');
-         $root.appendChild(mainDiv);
+        const $root = document.getElementById('root');
+        $root.appendChild(mainDiv);
     </script>
 </body>
+
 </html>
