@@ -41,6 +41,14 @@
          * Pomóż Stefanowi - chcemy żeby lista faktycznie wyświetlała 4x element * TEST na liście.
          * */
 
+        const state = [
+            { title: 'TEST' },
+            { title: 'TEST' },
+            { title: '------------' },
+            { title: 'mój 2' },
+            { title: 'domek', isSelected: true }
+        ];
+
         const $ulList = document.querySelector('#root ul')
 
         // Factory Function
@@ -52,13 +60,23 @@
             return myLiElement;
         }
 
-        $ulList.appendChild(createLiElement());
-        $ulList.appendChild(createLiElement());
 
-        $ulList.append('--------------')
 
-        $ulList.appendChild(createLiElement('mój 2'));
-        $ulList.appendChild(createLiElement('domek', 'red'));
+        for (const { title, isSelected } of state) {
+            $ulList.append(createLiElement(title, isSelected ? 'red' : ''))
+        }
+
+        // takie problemy na później:
+        state.push({ title: 'hello' })
+        // jak to "repaintować" (re-renderować) na DOM
+
+        // $ulList.append(
+        //     createLiElement(),
+        //     createLiElement(),
+        //     '--------------',
+        //     createLiElement('mój 2'),
+        //     createLiElement('domek', 'red')
+        // );
 
         console.log('!')
     </script>
