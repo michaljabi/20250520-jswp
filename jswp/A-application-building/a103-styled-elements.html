@@ -71,6 +71,16 @@
             return Array.isArray(elementOrArray) ? elementOrArray : [elementOrArray]
         }
 
+        function decorateWithStyle(element, styles) {
+            if (styles && styles instanceof Object) {
+                for (const key in styles) {
+                    // o nie ! mutacja (ale to nas nie przejmuje tutaj)
+                    element.style[key] = styles[key]
+                }
+            }
+            return element;
+        }
+
 
         function createElement(elementTAG, children = [], styles = '') {
             const element = document.createElement(elementTAG);
@@ -78,13 +88,13 @@
             element.append(...elementList(children))
             element.className = adaptToClassName(styles);
 
-            if (styles instanceof Object) {
-                for (const key in styles) {
-                    element.style[key] = styles[key]
-                }
-            }
+            // if (styles instanceof Object) {
+            //     for (const key in styles) {
+            //         element.style[key] = styles[key]
+            //     }
+            // }
 
-            return element;
+            return decorateWithStyle(element, styles);
         }
 
         const div = (elements, styles) => createElement('div', elements, styles);

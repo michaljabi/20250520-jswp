@@ -23,10 +23,13 @@
  * */
 
 class Car {
-	constructor (weight) {
+
+	bumper = 'black';
+
+	constructor(weight) {
 		this.weight = 1200;
 	}
-	calculateMaxSpeed(startSpeed)  {
+	calculateMaxSpeed(startSpeed) {
 		return 10 * startSpeed;
 	}
 }
@@ -35,7 +38,7 @@ class RaceCar {
 
 	weight;
 
-	constructor (car) {
+	constructor(car) {
 		this.weight = car.weight - 250;
 	}
 	calculateMaxSpeed(startSpeed) {
@@ -47,7 +50,7 @@ class MonsterTruckCar {
 
 	weight;
 
-	constructor (car) {
+	constructor(car) {
 		this.weight = car.weight + 2500;
 	}
 	calculateMaxSpeed(startSpeed) {
@@ -61,4 +64,4 @@ const raceCar = new RaceCar(baseCar);
 console.log(baseCar)
 console.log(raceCar)
 
-export {};
+export { };
