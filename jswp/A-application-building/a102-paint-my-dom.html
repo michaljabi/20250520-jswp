@@ -62,18 +62,28 @@
         const ul = (elements) => createElement('ul', elements);
         const li = (elements) => createElement('li', elements);
 
-        const mainDiv = div([
-            h1('Tytuł mojej strony'),
-            ul([
-                li('To'),
-                li('Jest'),
-                li('Kolejny'),
-                li('Test'),
-            ]),
-        ]);
+        function buildDiv(title = 'Tytuł mojej strony', items = []) {
+
+            const itemsRef = []
+            for (const item of items) {
+                itemsRef.push(li(item))
+            }
+
+            return div([
+                h1(title),
+                ul(itemsRef),
+            ]);
+        }
+
+        // const ref = buildDiv();
+
 
         const $root = document.getElementById('root');
-        $root.appendChild(mainDiv);
+        $root.appendChild(buildDiv());
+        $root.appendChild(buildDiv('test', ['to', 'jest', 'inny', 'test', '2']));
+
+
+        // ref.style.backgroundColor = 'red';
     </script>
 </body>
 
