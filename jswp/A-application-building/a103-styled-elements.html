@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A103 - Styled Elments</title>
+    <style>
+        .text-red {
+            color: darkred;
+        }
+        .text-blue {
+            color: blue;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main id="root"></main>
+    <script>
+        /**
+         * Teraz czas na odpowiedni "Look and feel" dla naszej aplikacji.
+         * Elementy które rysujemy powinno dać się stylować.
+         *
+         * Za równo za pomocą "style" jak i "class";
+         *
+         * Po wielu analizach, Stefan dochodzi do wniosku, że warto jednak wykorzystać ten CSS,
+         * jako reguły do stylowania naszych elementów za pomocą class.
+         * Jednak powinna być również możliwość pisania "inline style" - za pomocą obiektów JS.
+         *
+         * Dlatego robimy mały test z poprzednio napisanymi funkcjami, rozwiniętymi o podanie:
+         * albo listy klas (string[]) albo jednej klasy (string) albo obiektu ze stylami np. { color: 'red' }.
+         *
+         * div(['to jest'], 'text-red')
+         * div(['prosty'], ['text-blue', 'text-center'])
+         * div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' } )
+         *
+         * powinno wygenerować:
+         *
+         * <div class="text-red">to jest</div>
+         * <div class="text-blue text-center">prosty</div>
+         * <div style="border: 1px solid black; background-color: lightgreen;">test stylowania</div>
+         *
+         * Style klas są już zdefiniowane powyżej.
+         *
+         * ### Zadanie:
+         * Zaimplementuj uniwersalny sposób stylowania za pomocą nazwy klasy, listy klas
+         * lub obiektu reprezentującego style w postaci "klucz - wartość", wg. pokazanego wyżej schematu.
+         *
+         * Pomocne pomysły:
+         * https://developer.mozilla.org/en-US/docs/Web/API/Element/className
+         * https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+         * https://developer.mozilla.org/en-US/docs/Web/API/ElementCSSInlineStyle/style#setting_styles
+         * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Using_dynamic_styling_information#modify_an_element_style
+         * */
+
+         const mainDiv = div([
+	         div(['to jest'], 'text-red'),
+	         div(['prosty'], ['text-blue', 'text-center']),
+	         div(['test stylowania'], { border: '1px solid black', backgroundColor: 'lightgreen' } )
+         ]);
+
+         const $root = document.getElementById('root');
+         $root.appendChild(mainDiv);
+    </script>
+</body>
+</html>

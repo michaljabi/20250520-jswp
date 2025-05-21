@@ -1,0 +1,9 @@
+{
+  "name": "node-libs",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "echo \"Error: awaiting linter...\" && exit 1"
+  },
+  "private": true,
+  "type": "module"
+}

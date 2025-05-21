@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C101 - Modular APP </title>
+    <link rel="stylesheet" href="../B-separation-of-concerns/styles/bootstrap.min.css">
+</head>
+<body>
+    <main id="root"></main>
+    <script>
+	    /**
+         * " To mnie nie do końca urządza... :(( " ~ Stefan
+	     *
+         * Podział na osobne pliki zrodził kolejne problemy...
+         *
+         * Teraz nie widać skąd pochodzi kod.
+         * ... to znaczy - zobacz.
+         * W tym momencie w pliku z kodem do naszych elementów listy gości
+         * jest stała guestList - która pochodzi "z kosmosu"
+         * a konkretnie z przestrzeni globalnej...
+         *
+         * Stefan również boi się, że jak wróci do projektu po N czasie,
+         * to zacznie budować nowe elementy HTML zamiast używając API dla budowniczych
+         * (div, h1, li, ul)
+         *
+         * To będzie korzystał z dostępnego w przestrzeni globalnej "makeElement"
+         * i znów wszystko na piechotę...
+         *
+         * w Kodzie naszej listy gości znów dzieją się rzeczy dziwne,
+         * bo nie wiadomo skąd pochodzą (div, h1, li, ul) - to wszystko ma zakres globalny,
+         *
+         * Jakby tego było mało Stefan obawia się, że dodawanie plików script tutaj w HTMLu
+         * jako <script src=""> spowoduje - że nie będzie on mógł nad nimi zapanować.
+         * Nie chce on dodawać tych plików z poziomu HTML !!! one powinny w jakiś sposób
+         * "same importować to co im potrzebne" [!]
+         *
+         * No właśnie - sposób, którego szuka Stefan - to: MODULARYZACJA.
+         * odwieczna bolączką JavaScript w którym wszystko miesza się jak zupa z kremem w przestrzeni globalnej
+         *
+         * Okazuje się że jest kilka sposobów osiągnięcia modularyzacji - od prostego IIFE przez AMD aż po CommonJS oraz
+         * najnowsze: ES6 Modules.
+         *
+         * Oto czego nam na ten moment potrzeba: ES6 Modules.
+         *
+	     * ### Zadanie:
+         * Spraw aby dalej pojawiała się nam na ekranie lista gości i tytuł strony,
+         * jednak tutaj ma być dołączony tylko jeden plik: app.js
+         *
+         * pozostałe elementy masz już rozpoczęte (choć brakuje tutaj Twojego kodu z części B !)
+         * - i trzeba je połączyć modułami ES6 !
+	     * */
+    </script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>

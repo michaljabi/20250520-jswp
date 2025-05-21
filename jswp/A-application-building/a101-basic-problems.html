@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A101 - Basic Problems</title>
+</head>
+
+<body>
+    <div id="root">
+        <ul>
+
+        </ul>
+    </div>
+    <script>
+        /**
+         * Stefan ma misję - chce wybudować prostą aplikację webową,
+         * Ma mu ona pomóc w przygotowaniu listy gości, którzy przyjdą na przyjęcie.
+         * Poza samymi imionami i mailami gości, doda również informację, komu wysłał już zaproszenie,
+         * kto potwierdził przybycie - a kto nie może się na przyjęciu pojawić.
+         *
+         * Ponieważ Stefan, zna podstawy HTML + CSS. Wybiera język: JavaScript oraz ekosystem Node.js
+         * jako platformę do zbudowania swojej aplikacji
+         *
+         * Jednak... pierwsze kroki - bywają ciężkie. A element zadziwienia w JS - to chyba standard...
+         *
+         *
+         * Na dobry początek Stefan wyobraził sobie listę, tylko listę HTML <ul>,
+         * którą zamiast w czystym HTML będzie chciał rysować za pomocą JavaScript.
+         * Sama lista (tag: UL) była już narysowana w HTML, jednak chciał do niej dodać ten sam element <li>
+         * kilka razy.
+         *
+         * Jakież było jego zdziwienie - kiedy okazało się, że próbując dodać ten sam element 4 razy do listy.
+         * Pojawiał sie on na DOM tylko jeden raz.
+         *
+         * Stefan doczytał - że nie może mieć na drzewie DOM tej samej instancji więcej niż 1 raz.
+         * Jeśli będzie próbował tak robić - tylko ostatnie miejsce, w które będzie próbował wczepić element
+         * do DOM - zadziała.
+         *
+         * ### Zadanie:
+         * Pomóż Stefanowi - chcemy żeby lista faktycznie wyświetlała 4x element * TEST na liście.
+         * */
+
+        const $ulList = document.querySelector('#root ul')
+
+        const myLiElement = document.createElement('li');
+        myLiElement.textContent = 'TEST';
+
+        $ulList.appendChild(myLiElement);
+        $ulList.appendChild(myLiElement);
+        $ulList.appendChild(myLiElement);
+        $ulList.appendChild(myLiElement);
+    </script>
+</body>
+
+</html>

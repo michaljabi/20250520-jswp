@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A102 Paint my DOM!</title>
+</head>
+<body>
+    <main id="root"></main>
+    <script>
+        /**
+         * Stefan wie - że jego program musi w całości "rysować się za pomocą JS".
+         * Dlatego jedna "factory function" nie wystarczy
+         *
+         * Potrzebuje on na podstawie poprzedniego rozwiązania zad a101,
+         * zrobić zestaw funkcji pomocniczych wykorzystujących przygotowaną przez nas w a101 factory function,
+         * do Tworzenia różnych elementów HTML, tak aby był możliwy taki zapis:
+         *
+         * div([
+         *    h1('Tytuł mojej strony'),
+         *    ul([
+         *       li('To'),
+         *       li('Jest'),
+         *       li('Kolejny'),
+         *       li('Test'),
+         *    ]),
+         * ])
+         *
+         * Wtedy będziemy osiągali następujący kod HTML:
+         * <div>
+         *     <h1>Tytuł mojej strony</h1>
+         *     <ul>
+         *         <li>To</li>
+         *         <li>Jest</li>
+         *         <li>Kolejny</li>
+         *         <li>Test</li>
+         *     </ul>
+         * </div>
+         *
+         * ### Zadanie:
+         * Spraw aby kod poniżej działał i faktycznie realizował się na drzewie HTML w postaci zapisanej powyżej.
+         * Wykorzystaj do tego poprzednie rozwiązanie (będzie trzeba je jedynie "delikatnie" zrefaktoryzować)
+         *
+         * Do zagnieżdżania elementów pomoże Ci funkcja .append()
+         * https://developer.mozilla.org/en-US/docs/Web/API/Element/append
+         * */
+
+         const mainDiv = div([
+	        h1('Tytuł mojej strony'),
+	        ul([
+		        li('To'),
+	            li('Jest'),
+	            li('Kolejny'),
+                li('Test'),
+            ]),
+         ]);
+
+         const $root = document.getElementById('root');
+         $root.appendChild(mainDiv);
+    </script>
+</body>
+</html>

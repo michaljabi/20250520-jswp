@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D101 - State of Data - refresh </title>
+    <link rel="stylesheet" href="../B-separation-of-concerns/styles/bootstrap.min.css">
+</head>
+<body>
+    <main id="root"></main>
+    <script>
+	    /**
+         * Kolejny problem - to zmiana danych.
+         *
+         * Zauważ, że generalnie - wszystko zmierza w dobrym kierunku.
+         * Mamy oddzielne miejsce na element z Listą Gości, która pobiera dane z modelu (guests).
+         *
+         * Jednak - nie mamy możliwości aktualizacji UI w momencie ZMIANY DANYCH [!] 😱
+         *
+         * Stefan próbował dodać nową osobę do listy
+         * jako :
+         * guestList.push('Zosia');
+         *
+         * Niestety - nasz UI - nie wie o tej zmianie, nie zaktualizuje się po niej.
+         *
+         * Rozwiązanie na szybko które przyszło Stefanowi na myśl, to na razie "Ręczne przerysowanie"
+         * elementów <ul> w momencie dodania nowej osoby na listę,
+         * jeśli zrobimy to w tym samym miejscu co deklaracja "guestListDiv"
+         *
+         * przykładowo:
+
+            guestList.push('Zosia');
+            myUl.innerHTML = '';
+            myUl.append(
+                ...guestListMappedToLi
+            )
+
+         * Taki kod działa - i faktycznie widać nową osobę, jednak można dodawać tą osobę tylko z poziomu
+         * guestListDiv
+         *
+         * To rozwiązanie nie jest jednak akceptowalne w dłuższej perspektywie..
+         *
+         * [......]
+         *
+
+         * A co jeśli, nasz stan danych - sam informowałby zainteresowanych, że jest jakaś zmiana.
+         * Każdy chętny mógłby wtedy poprosić o te dane i aktualizować się w momencie gdy tylko jest jakaś zmiana
+         * niezależnie od samego źródła danych.
+         *
+         * Stefan czytał o Observables - i bibliotece RxJS - to ona może nam tutaj pomóc.
+         * Jeśli źródło danych pozostanie w modelu i udostępnimy odpowiednie metody...
+         * to może się udać !
+         *
+         * W tym układzie nasz stan danych - będzie wyprowadzał odpowiednie API - stanie się "Stateful Service'm"
+         * Tylko, jak użyć tego RxJSa ?
+         *
+         * O tym przekonamy się razem - jednak zanim to nastąpi... trzeba przygotować POC (Proff of Concept)
+         *
+	     * ### Zadanie:
+         * Przygotuj sprawdzenie teorii Stefana - jeśli założysz że:
+         *  - sama lista gości jest jako model/guests -> wyprowadzi metody np:
+         *
+         *  addNewGuest()
+         *  getAllGuests()
+         *
+         *  oraz event listener (nasłuch) jako:
+         *
+         *  onGuestAdd(() => {})
+         *
+         *  który przyjmie funkcję - ma się ona uruchomić tylko wtedy kiedy faktycznie nastąpiła zmiana (addNewGuest)
+         *
+         *  funkcja uruchomi się jako callback - a sam listener (onGuestAdd) zarejestrujemy w elemencie "guestListDiv"
+         *
+         *
+         * ### Zadanie (do zrobienia razem):
+         * Przechodzimy na RxJS ! - ponieważ nasze rozwiązanie POC nie zda egzaminu przy większej ilości zainteresowanych
+         * listenerem onGuestAdd()
+	     * */
+    </script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>

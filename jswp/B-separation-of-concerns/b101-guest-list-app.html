@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B101 - Guest list app - SOC</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+</head>
+<body>
+    <main id="root"></main>
+    <script>
+	    /**
+	     * Stefan zauważa pewien problem w swojej aplikacji.
+         * Zaczyna ona "puchnąć" w jednym pliku.
+         *
+         * To nie jest dobry znak...
+         * Fajnie byłoby mieć podział na oddzielne pliki.
+         * Zauważ: CSS z Bootstrap'em ma już swoje nowe mieszkanie [!]
+         *
+         * Owszem wiadomo, można dla JavaScript zrobić
+         * <script src="" />
+         * i podzielić nasz kod do osobnych plików
+         * Jednak - to nie takie oczywiste jak go podzielić.
+         *
+         * Znając podstawowy podział Model - View.
+         * Stefan zdaje sobie sprawę, że oddzielnie będzie mieszkał:
+         *
+         * - kod odpowiadający za dane [Model] (guestList)
+         * - kod odpowiadający za rysowanie strony z listą gości [View] -> div(...)
+	     * - kod odpowiadający za pomocnicze funkcje do rysowania (div, h1, makeElement etc.)
+         *
+	     * ### Zadanie:
+         * Podziel na osobne pliki i załącz do kodu HTML wg. pomysłu Stefana. wykorzystując folder "scripts".
+         * Wykorzystaj kodziki, które masz z części A.
+         * Spraw aby po Twoim refactoringu - tutaj zostało tylko:
+
+           const $root = document.getElementById('root');
+           $root.appendChild(mainDiv);
+
+	     * */
+
+	    const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
+
+        const mainDiv = div([
+        	div([
+              h1('A Little Party Never Killed Nobody'),
+            ], 'p-5 mb-4 bg-light rounded-3'),
+	        div([
+                h2('Lista gości'),
+                ul([
+                	li('Gość 1', 'list-group-item'),
+                	li('Gość 2', 'list-group-item')
+                ], 'list-group')
+            ], 'container')
+        ]);
+
+        const $root = document.getElementById('root');
+        $root.appendChild(mainDiv);
+    </script>
+</body>
+</html>

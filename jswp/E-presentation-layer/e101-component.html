@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E101 - Making a components with presentation layer </title>
+    <link rel="stylesheet" href="../B-separation-of-concerns/styles/bootstrap.min.css">
+</head>
+<body>
+    <main id="root"></main>
+    <script>
+	    /**
+         * Stefan dostrzega pewną możliwość !
+         *
+         * Przecież całą naszą listę guestListDiv można by teraz łatwo multiplikować [!]
+         * Wystarczy, że skorzystamy z WebComponents !
+         *
+         * https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements
+         *
+         * Jeśli np. nazwać naszą listę GuestList - zrobić z niej klasę i dziedziczyć po HTMLElement
+         * To będzie możliwe zrobienie:
+         *
+         * $root.appendChild(new GuestList());
+         *
+         * dla komponentu:
+         *
+         * class GuestList extends HTMLElement {}
+         *
+         * trzeba jedynie pamiętać o jego rejestracji w Custom Elements:
+         * - możemy zrobić to w tym samym pliku co deklaracja naszej klasy [!]
+         *
+         * customElements.define('guest-list', GuestList);
+         *
+         * W tym układzie możemy dodać cały nasz kod z div([.....])
+         * w konstruktorze GuestList jako dodany "do samego siebie" this.append();
+         *
+         * To stwarza przed nami możliwości robienia oddzielnych komponentów, zawierających swoją własną logikę!
+         * Co więcej możemy zmienić źródło danych - jeśli nasz guest.service zamienimy na klasę !
+         * I skorzystamy z IoC (Inversion of Control)
+         *
+         * Wstrzykując instancje serwisu w konstruktor.
+         * Wtedy mamy niezależne źródło danych i niezależną listę, która to źródło może posiadać.
+         *
+         * ### Zadanie:
+         * - Utwórz nową klasę GuestList i rejestrując ją customElements - utwórz komponent,
+         * potwierdź jego reużywalność
+         *
+         *
+         * ### Zadanie 2 (do zrobienia razem):
+         * - Potem przerób serwis guest.service na klasę i jej instancję podaj do konstruktora GuestList
+         * - Korzystaj z guestService tak jak do tej pory - zauważ że to co teraz robimy to jedynie refactoring
+         * - Pozwalający uzyskać re-używalność naszego modelu danych oraz wybudowanych elementów HTML (w DOM API).
+         *
+	     * */
+    </script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>
