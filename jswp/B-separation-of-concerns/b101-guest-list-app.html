@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>B101 - Guest list app - SOC</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
 </head>
+
 <body>
     <main id="root"></main>
-    <script>
-	    /**
-	     * Stefan zauważa pewien problem w swojej aplikacji.
+    <script type="module">
+        // wykorzystując podejście ESM - podziel: a104 na moduły!
+        /**
+         * Stefan zauważa pewien problem w swojej aplikacji.
          * Zaczyna ona "puchnąć" w jednym pliku.
          *
          * To nie jest dobry znak...
@@ -26,9 +29,9 @@
          *
          * - kod odpowiadający za dane [Model] (guestList)
          * - kod odpowiadający za rysowanie strony z listą gości [View] -> div(...)
-	     * - kod odpowiadający za pomocnicze funkcje do rysowania (div, h1, makeElement etc.)
+         * - kod odpowiadający za pomocnicze funkcje do rysowania (div, h1, makeElement etc.)
          *
-	     * ### Zadanie:
+         * ### Zadanie:
          * Podziel na osobne pliki i załącz do kodu HTML wg. pomysłu Stefana. wykorzystując folder "scripts".
          * Wykorzystaj kodziki, które masz z części A.
          * Spraw aby po Twoim refactoringu - tutaj zostało tylko:
@@ -36,25 +39,17 @@
            const $root = document.getElementById('root');
            $root.appendChild(mainDiv);
 
-	     * */
+         * */
 
-	    const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
+        // import { guestList } from './scripts/guest-list'
+        // [!] to tak samo jakby napisać w ten sposób [!]
+        // import { guestList } from './scripts/guest-list/index.js'
 
-        const mainDiv = div([
-        	div([
-              h1('A Little Party Never Killed Nobody'),
-            ], 'p-5 mb-4 bg-light rounded-3'),
-	        div([
-                h2('Lista gości'),
-                ul([
-                	li('Gość 1', 'list-group-item'),
-                	li('Gość 2', 'list-group-item')
-                ], 'list-group')
-            ], 'container')
-        ]);
+        import { mainDiv } from './scripts/main-div.js'
 
         const $root = document.getElementById('root');
         $root.appendChild(mainDiv);
     </script>
 </body>
+
 </html>
