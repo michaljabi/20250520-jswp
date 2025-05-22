@@ -1,0 +1,1 @@
+export const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
