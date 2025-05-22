@@ -1,4 +1,4 @@
-import { Subject } from "rxjs";
+import { Subject, BehaviorSubject } from "rxjs";
 
 /**
  * Wzorzec: Observer | Obserwator
@@ -53,10 +53,16 @@ function firstComponent(ev$) {
 
 function secondComponent(ev$) {
 	//tutaj
+	ev$.subscribe((car) => {
+		console.log(car)
+	})
 }
 
 function thirdComponent(ev$) {
 	//tutaj
+	ev$.subscribe((car) => {
+		console.log(car)
+	})
 }
 
 (function mainBroadcaster() {
@@ -64,22 +70,39 @@ function thirdComponent(ev$) {
 	// logic here
 	// Poinformuj każdego o nowym samochodzie
 	const car = new Car('BMW');
-	const carSubject = new Subject();
+	const carSubject = new BehaviorSubject([]);
 
 	// Podanie możliwości subskrypcji
 	firstComponent(carSubject);
 	secondComponent(carSubject);
 	thirdComponent(carSubject);
 
-	carSubject.next(new Car('Mercedes'))
+
 	// kolejna subskrypcja:
 	carSubject.subscribe((car) => {
 		console.log(car);
 	})
 
+	carSubject.next(['Anna'])
+
+
+	carSubject.subscribe((car) => {
+		console.log(car);
+	})
+	carSubject.subscribe((car) => {
+		console.log(car);
+	})
+
+	carSubject.next(['Anna', 'Krysia'])
+
+	carSubject.subscribe((car) => {
+		console.log(car);
+	})
+
+	// carSubject.next('cokolwiek2')
 	// Rozgłoszenie
-	carSubject.next(car);
-	carSubject.next(new Car('Audi'))
+	//carSubject.next(car);
+	//carSubject.next(new Car('Audi'))
 
 })();
 
