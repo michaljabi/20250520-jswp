@@ -25,8 +25,8 @@ class IceTruckService {
 	static instance;
 	name = '';
 
-	constructor (name) {
-		if(IceTruckService.instance) {
+	constructor(name) {
+		if (IceTruckService.instance) {
 			return IceTruckService.instance;
 		}
 		this.name = name;

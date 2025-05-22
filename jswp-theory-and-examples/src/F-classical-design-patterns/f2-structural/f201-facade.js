@@ -13,21 +13,27 @@
  *
  * */
 
+// import { document } from 'jsdom';
+
+const document = {
+	addEventListener() { }
+}
+
 // Zły kodzik:
-document.addEventListener('.save-btn', () =>  {
+document.addEventListener('.save-btn', () => {
 	const myUser = JSON.stringify({ name: 'Michal', lastName: 'Kowalski' });
 	fetch('http://some.address', { method: 'POST', body: myUser })
 });
 
-document.addEventListener('.get-users-btn', () =>  {
+document.addEventListener('.get-users-btn', () => {
 	fetch('http://some.address/users')
 });
 
-document.addEventListener('.get-users-button3', () =>  {
+document.addEventListener('.get-users-button3', () => {
 	fetch('http://some.address/users')
 });
 
-document.addEventListener('.get-other-users-btn', () =>  {
+document.addEventListener('.get-other-users-btn', () => {
 	fetch('http://some.address/users/other')
 		.then((users) => users.json())
 		.then((users) => users.length)
@@ -36,7 +42,7 @@ document.addEventListener('.get-other-users-btn', () =>  {
 
 // Fasada:
 const userService = {
-	mainUrl: 'http://some.address',
+	get mainUrl() { return 'http://some.address' }, // jeśli mainUrl ma tylko getter a nie ma settera to jest "ready-only"
 	addUser(user) {
 		return fetch(this.mainUrl, { method: 'POST', body: user })
 	},
@@ -50,20 +56,25 @@ const userService = {
 	}
 };
 
+userService.mainUrl //=
+userService.mainUrl = 'hello'
+userService.mainUrl //=
+
+
 // Dobry kodzik:
-document.addEventListener('.save-btn', () =>  {
+document.addEventListener('.save-btn', () => {
 	const myUser = { name: 'Michal', lastName: 'Kowalski' };
 	userService.addUser(myUser)
 });
 
-document.addEventListener('.get-users-btn', () =>  {
+document.addEventListener('.get-users-btn', () => {
 	userService.getUsers()
 });
 
-document.addEventListener('.get-users-button3', () =>  {
+document.addEventListener('.get-users-button3', () => {
 	userService.getUsers()
 });
 
-document.addEventListener('.get-other-users-btn', () =>  {
+document.addEventListener('.get-other-users-btn', () => {
 	userService.getOtherUsersCount()
 });
