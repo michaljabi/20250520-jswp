@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'https://esm.sh/rxjs'
 
 const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
 
-console.log(new BehaviorSubject);
+console.log(new BehaviorSubject());
 
 // rxjs
 // new BehaviorSubject(['Marysia', 'Jacek', 'Agata', 'Zbyszek']);
