@@ -5,11 +5,15 @@ export const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
 // 2. Promise (async/await)
 // 3. Streams / Observables
 
-export function onAddGuestListener(eventHandler) {
+let handler;
 
+export function onAddGuestListener(eventHandler) {
+    handler = eventHandler;
 }
 
 
 export function addGuest(name) {
+    guestList.push(name);
 
+    handler(guestList)
 }
