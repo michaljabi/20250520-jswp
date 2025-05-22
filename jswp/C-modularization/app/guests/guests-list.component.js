@@ -23,6 +23,12 @@ export function GuestsList({ title = 'Lista gości' }) {
         listRef.append(...list.map(name => GuestsListItem({ name })));
     })
 
+    onAddGuestListener(() => { })
+    onAddGuestListener(() => { })
+    onAddGuestListener(() => { })
+    onAddGuestListener(() => { })
+    onAddGuestListener(() => { })
+
     inputRef.addEventListener('keydown', (e) => {
         const name = inputRef.value.trim();
         if (e.key === 'Enter' && name) {
