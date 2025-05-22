@@ -1,11 +1,13 @@
 import { PageHeader } from "../../shared/page-header.component.js";
 import { GuestsList } from "../../app/guests/guests-list.component.js";
 import { div } from "../../common/dom-elements.js";
-import { onAddGuestListener } from "./guests.model.js";
+import { guestsService } from "./guests.service.js";
 
 export function GuestsPage() {
 
-    const unsub = onAddGuestListener((list) => {
+    guestsService.guests.splice(0, 10);
+
+    const unsub = guestsService.onAddGuestListener((list) => {
         console.log(list)
     })
 

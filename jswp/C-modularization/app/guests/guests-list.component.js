@@ -2,11 +2,11 @@ import { div, h2, ul, input, button } from "../../common/dom-elements.js"
 import { renderIf } from "../../common/dom-helpers.js"
 import { IncrementButton } from "../../shared/increment-button.component.js"
 import { GuestsListItem } from "./guests-list-item.component.js"
-import { guestList, addGuest, onAddGuestListener } from "./guests.model.js"
+import { guestsService } from "./guests.service.js"
 
 export function GuestsList({ title = 'Lista gości' }) {
 
-    const guests = guestList;
+    const guests = guestsService.guests;
     const listRef = ul(guests.map(name => GuestsListItem({ name })), 'list-group');
     const inputRef = input('form-control mx-2', { placeholder: 'wpisz imię...' })
 
@@ -18,21 +18,21 @@ export function GuestsList({ title = 'Lista gości' }) {
 
     // btn
 
-    onAddGuestListener((list) => {
+    guestsService.onAddGuestListener((list) => {
         listRef.innerHTML = '';
         listRef.append(...list.map(name => GuestsListItem({ name })));
     })
 
-    onAddGuestListener(() => { })
-    onAddGuestListener(() => { })
-    onAddGuestListener(() => { })
-    onAddGuestListener(() => { })
-    onAddGuestListener(() => { })
+    guestsService.onAddGuestListener(() => { })
+    guestsService.onAddGuestListener(() => { })
+    guestsService.onAddGuestListener(() => { })
+    guestsService.onAddGuestListener(() => { })
+    guestsService.onAddGuestListener(() => { })
 
     inputRef.addEventListener('keydown', (e) => {
         const name = inputRef.value.trim();
         if (e.key === 'Enter' && name) {
-            addGuest(name)
+            guestsService.addGuest(name)
             inputRef.value = '';
         }
     })
