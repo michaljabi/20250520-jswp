@@ -6,28 +6,18 @@ import { guestsService } from "./guests.service.js"
 
 export function GuestsList({ title = 'Lista gości' }) {
 
-    const guests = guestsService.guests;
-    const listRef = ul(guests.map(name => GuestsListItem({ name })), 'list-group');
-    const inputRef = input('form-control mx-2', { placeholder: 'wpisz imię...' })
+    const h2Ref = h2(title);
+    const listRef = ul([], 'list-group');
+    const inputRef = input('form-control mx-2', { placeholder: 'wpisz imię...' });
 
-    // setTimeout(() => {
-    //     guests.push('test');
-    //     listRef.innerHTML = '';
-    //     listRef.append(...guests.map(name => GuestsListItem({ name })));
-    // }, 3000)
-
-    // btn
-
-    guestsService.onAddGuestListener((list) => {
+    guestsService.getGuests().subscribe((list) => {
         listRef.innerHTML = '';
         listRef.append(...list.map(name => GuestsListItem({ name })));
     })
 
-    guestsService.onAddGuestListener(() => { })
-    guestsService.onAddGuestListener(() => { })
-    guestsService.onAddGuestListener(() => { })
-    guestsService.onAddGuestListener(() => { })
-    guestsService.onAddGuestListener(() => { })
+    guestsService.getGuestsCount().subscribe((nr) => {
+        h2Ref.innerHTML = `Lista gości (${nr})`;
+    })
 
     inputRef.addEventListener('keydown', (e) => {
         const name = inputRef.value.trim();
@@ -38,7 +28,7 @@ export function GuestsList({ title = 'Lista gości' }) {
     })
 
     return div([
-        h2(title),
+        h2Ref,
         listRef,
         div([
             inputRef,

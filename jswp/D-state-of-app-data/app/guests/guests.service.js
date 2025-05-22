@@ -1,58 +1,29 @@
-import { BehaviorSubject } from 'https://esm.sh/rxjs'
-
-const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
-
-console.log(new BehaviorSubject());
-
-// rxjs
-// new BehaviorSubject(['Marysia', 'Jacek', 'Agata', 'Zbyszek']);
+import { BehaviorSubject, map } from 'https://esm.sh/rxjs'
 
 // 1. callback
-
 // 2. Promise (async/await)
 // 3. Streams / Observables
+// warto sprawdzić w rxjs
+// cold vs hot stream
+// endless stream
 
-let addGuestHandlers = [/* ref1, ref2, ref3 */]; //  [/* ref1, ref3 */]
+const guestList = ['Marysia', 'Jacek', 'Agata', 'Zbyszek'];
+const guestSubject = new BehaviorSubject(guestList);
+const guest$ = guestSubject.asObservable();
+const guestWithExcalation$ = guest$.pipe(map(gL => gL.filter(n => n !== 'Jacek')), map(guestList => guestList.map(n => n + '!')))
+const numberOfGuest$ = guest$.pipe(map(guestList => guestList.length))
 
-// FASADE (fasada)
-// + 
-// SINGLETON (guestsService jest tylko jeden na całą aplikację)
 export const guestsService = {
-    get guests() { // computed!
-        // guests są tylko do odczytu...
-        return [...guestList];
+    getGuests() {
+        return guest$;
     },
-    onAddGuestListener(eventHandler) {
-        addGuestHandlers.push(eventHandler);
-        return () => {
-            addGuestHandlers = addGuestHandlers.filter(e => e !== eventHandler)
-        }
+    getExclamatedGuests() {
+        return guestWithExcalation$;
+    },
+    getGuestsCount() {
+        return numberOfGuest$;
     },
     addGuest(name) {
-        guestList.push(name);
-        for (const addHandler of addGuestHandlers) {
-            addHandler(guestsService.guests)
-        }
+        guestSubject.next([...guestSubject.getValue(), name])
     }
 }
-
-/*
-export function getGuests() {
-    return [...guestList];
-}
-
-export function onAddGuestListener(eventHandler) {
-    addGuestHandlers.push(eventHandler);
-    return () => {
-        addGuestHandlers = addGuestHandlers.filter(e => e !== eventHandler)
-    }
-}
-
-
-export function addGuest(name) {
-    guestList.push(name);
-    for (const addHandler of addGuestHandlers) {
-        addHandler(guestList)
-    }
-}
-*/

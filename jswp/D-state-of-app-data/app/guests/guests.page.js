@@ -5,14 +5,14 @@ import { guestsService } from "./guests.service.js";
 
 export function GuestsPage() {
 
-    guestsService.guests.splice(0, 10);
+    //guestsService.getGuests().next([])
 
-    const unsub = guestsService.onAddGuestListener((list) => {
+    const subscription = guestsService.getExclamatedGuests().subscribe((list) => {
         console.log(list)
     })
 
     setTimeout(() => {
-        unsub();
+        subscription.unsubscribe();
     }, 5000);
 
     return div([
