@@ -2,18 +2,20 @@ import { div } from "./dom-elements";
 
 export const renderIf = (condition$, elementFactory) => {
 
-    const fragment = div();
+    const fragment = new DocumentFragment();
     condition$.subscribe((result) => {
         //
         const element = elementFactory();
-        fragment.innerHTML = '';
+        // fragment.replaceChildren();
         if (result) {
-            //
-            fragment.append(element);
+           // console.log(element)
+            fragment.replaceChildren(element);
         } else {
             ///
-            fragment.append(new Comment(`${element.tagName}(${element.className}) not rendered because result is: ${result}`))
+            fragment.replaceChildren(new Comment(`${element.tagName}(${element.className}) not rendered because result is: ${result}`))
         }
+
+        console.log(fragment.children)
     })
     return fragment;
 }
