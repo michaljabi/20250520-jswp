@@ -1,5 +1,5 @@
 import { a, div, nav, button, ul, span, li } from "../common/dom-elements";
-import { router, withNavLinkTo } from "../router";
+import { router, withNavLinkTo, withLinkTo } from "../router";
 
 export function NavBar() {
 

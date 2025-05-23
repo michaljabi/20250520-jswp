@@ -3,24 +3,36 @@ import { HomePage } from "./app/home.page";
 import { GuestsPage } from "./app/guests/guests.page";
 import { LabsPage } from "./app/labs/labs.page";
 
+type CalculateLinkFn = (ev: MouseEvent) => string | null;
+
 export const router = createBrowserHistory();
 
-export function useLinkTo(element: HTMLElement, link: string) {
+export function withLinkTo(
+  element: HTMLElement,
+  calculateLink: string | CalculateLinkFn
+) {
   element.addEventListener("click", (ev: MouseEvent) => {
-    router.push(link);
+    const link =
+      typeof calculateLink === "string" ? calculateLink : calculateLink(ev);
+    if (link) {
+      router.push(link);
+    }
   });
   return element;
 }
 
 export function withNavLinkTo(element: HTMLAnchorElement) {
-  element.addEventListener("click", (ev) => {
+  // element.addEventListener("click", (ev) => {
+  //   ev.preventDefault();
+  //   const href = element.getAttribute("href");
+  //   if (href) {
+  //     router.push(href);
+  //   }
+  // });
+  return withLinkTo(element, (ev: MouseEvent) => {
     ev.preventDefault();
-    const href = element.getAttribute("href");
-    if (href) {
-      router.push(href);
-    }
+    return element.getAttribute("href");
   });
-  return element;
 }
 
 const app = document.querySelector<HTMLDivElement>("#app");
