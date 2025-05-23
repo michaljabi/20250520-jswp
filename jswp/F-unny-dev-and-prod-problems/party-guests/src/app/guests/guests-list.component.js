@@ -5,13 +5,13 @@ import { GuestsListItem } from "./guests-list-item.component.js"
 import { guestsService } from "./guests.service.js"
 import { of } from 'rxjs'
 
-export function GuestsList({ title = 'Lista gości' }) {
+export function GuestsList({ title = 'Lista gości', guest$, guestsCount$ }) {
 
     const h2Ref = h2(title);
     const listRef = ul([], 'list-group');
     const inputRef = input('form-control mx-2', { placeholder: 'wpisz imię...' });
 
-    guestsService.getGuests().subscribe((list) => {
+    guest$.subscribe((list) => {
         listRef.innerHTML = '';
         listRef.append(...list.map(guest => {
             const ref = GuestsListItem(guest)
@@ -22,7 +22,7 @@ export function GuestsList({ title = 'Lista gości' }) {
         }));
     })
 
-    guestsService.getGuestsCount().subscribe((nr) => {
+    guestsCount$.subscribe((nr) => {
         h2Ref.innerHTML = `Lista gości (${nr})`;
     })
 

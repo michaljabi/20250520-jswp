@@ -3,6 +3,7 @@ import { GuestsList } from "../../app/guests/guests-list.component.js";
 import { div } from "../../common/dom-elements.js";
 import { guestsService } from "./guests.service.js";
 import { NavBar } from "../../shared/nav-bar.component.js";
+import { of } from 'rxjs'
 
 export function GuestsPage() {
 
@@ -20,7 +21,8 @@ export function GuestsPage() {
         PageHeader({ title: 'A little party never killed nobody....' }),
         div([
             NavBar(),
-            GuestsList({ guests: ['Michał', 'Anna'] })
+            GuestsList({ guest$: guestsService.getGuests(), guestsCount$: guestsService.getGuestsCount() }),
+            GuestsList({ guest$: of([]), guestsCount$: of(0) })
         ], 'container')
     ]);
 }
