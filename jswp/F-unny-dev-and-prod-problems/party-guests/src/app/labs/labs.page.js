@@ -1,5 +1,6 @@
 import { div, h2 } from "../../common/dom-elements";
 import { renderIf } from "../../common/dom-helpers";
+import { IncrementButton } from "../../shared/increment-button.component";
 import { NavBar } from "../../shared/nav-bar.component";
 import { PageHeader } from "../../shared/page-header.component";
 import { usersService } from "../users/users.service";
@@ -20,7 +21,8 @@ export function LabsPage() {
         div([
             NavBar(),
             h2Ref,
-            renderIf(usersService.isAuth(), div('Hello you see me now..'))
+            renderIf(usersService.isAuth(), () => div('Hello you see me now..')),
+            renderIf(usersService.isAuth(), IncrementButton)
         ], 'container')
     ]);
 }

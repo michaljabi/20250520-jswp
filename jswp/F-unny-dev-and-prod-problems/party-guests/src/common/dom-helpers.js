@@ -1,9 +1,11 @@
-export const renderIf = (condition$, element) => {
+import { div } from "./dom-elements";
 
-    const fragment = new DocumentFragment();
+export const renderIf = (condition$, elementFactory) => {
+
+    const fragment = div();
     condition$.subscribe((result) => {
         //
-        console.log(result, element);
+        const element = elementFactory();
         fragment.innerHTML = '';
         if (result) {
             //
