@@ -38,29 +38,44 @@ export function withNavLinkTo(element: HTMLAnchorElement) {
 const app = document.querySelector<HTMLDivElement>("#app");
 
 router.listen(({ location }) => {
+  //@ts-ignore
   handleRouteChange(location.pathname);
 });
 
+// Strategies:
+const routes = {
+  "/": () => HomePage(),
+  "/guests": () => GuestsPage(),
+  "/labs": () => LabsPage(),
+};
+
+// implementacja2:
+/*
+const routesArr = [
+  { path: '/' , component: () => HomePage()},
+]
+*/
+
+// @ts-ignore
 handleRouteChange(router.location.pathname);
 
-function handleRouteChange(pathname: string) {
-  if (pathname === "/") {
-    //....
-    if (app) {
-      app.innerHTML = "";
-      app.append(HomePage());
-    }
-  } else if (pathname === "/guests") {
-    //....
-    if (app) {
-      app.innerHTML = "";
-      app.append(GuestsPage());
-    }
-  } else if (pathname === "/labs") {
-    //....
-    if (app) {
-      app.innerHTML = "";
-      app.append(LabsPage());
-    }
+// handleRouteChange("");
+
+// function handleRouteChange(pathname: "/" | "/guests" | "/labs") {
+function handleRouteChange(pathname: keyof typeof routes) {
+  /*
+  const route = routesArr.find(r => r.path === pathname)
+  if(route && app) {
+    app.innerHTML = "";
+    app.append(route.component());
+  }
+  */
+
+  // użycie strategy pattern;
+  const switchComponentAction = routes[pathname];
+
+  if (switchComponentAction && app) {
+    app.innerHTML = "";
+    app.append(switchComponentAction());
   }
 }
