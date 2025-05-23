@@ -1,4 +1,4 @@
-import { div, h2, ul, input, button } from "../../common/dom-elements.js"
+import { div, h2, ul, input } from "../../common/dom-elements.js"
 import { renderIf } from "../../common/dom-helpers.js"
 import { IncrementButton } from "../../shared/increment-button.component.js"
 import { GuestsListItem } from "./guests-list-item.component.js"
@@ -13,7 +13,13 @@ export function GuestsList({ title = 'Lista gości' }) {
 
     guestsService.getGuests().subscribe((list) => {
         listRef.innerHTML = '';
-        listRef.append(...list.map(name => GuestsListItem({ name })));
+        listRef.append(...list.map(guest => {
+            const ref = GuestsListItem(guest)
+            ref.addEventListener('click', () => {
+                guestsService.changeStatus(guest, 'CONFIRMED')
+            })
+            return ref;
+        }));
     })
 
     guestsService.getGuestsCount().subscribe((nr) => {
