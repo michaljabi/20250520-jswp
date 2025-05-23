@@ -16,7 +16,9 @@ const guestSubject = new BehaviorSubject(guestList);
 const guest$ = guestSubject.asObservable();
 const guestWithExcalation$ = guest$.pipe(
   map((gL) => gL.filter((n) => n !== "Jacek")),
+  // map((gL) => gL.filter((u) => u.name !== "Jacek")),
   map((guestList) => guestList.map((n) => n + "!"))
+ // map((guestList) => guestList.map((u) => u.name + "!"))
 );
 const numberOfGuest$ = guest$.pipe(map((guestList) => guestList.length));
 

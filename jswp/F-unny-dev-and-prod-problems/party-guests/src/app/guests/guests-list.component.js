@@ -3,6 +3,7 @@ import { renderIf } from "../../common/dom-helpers.js"
 import { IncrementButton } from "../../shared/increment-button.component.js"
 import { GuestsListItem } from "./guests-list-item.component.js"
 import { guestsService } from "./guests.service.js"
+import { of } from 'rxjs'
 
 export function GuestsList({ title = 'Lista gości' }) {
 
@@ -32,7 +33,7 @@ export function GuestsList({ title = 'Lista gości' }) {
         listRef,
         div([
             inputRef,
-            renderIf(() => true, IncrementButton({ value: 10, classes: 'btn btn-primary' })),
+            renderIf(of(true), () => IncrementButton({ value: 10, classes: 'btn btn-primary' })),
         ], 'p-2 d-flex'),
 
     ])
