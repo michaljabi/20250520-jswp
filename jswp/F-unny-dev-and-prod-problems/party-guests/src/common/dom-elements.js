@@ -29,11 +29,14 @@ function createElement(elementTAG, children = []) {
 
 // FACTORIES
 export const div = (elements, classOrStyle) => decorateWithStyle(createElement('div', elements), classOrStyle);
+export const span = (elements, classOrStyle) => decorateWithStyle(createElement('span', elements), classOrStyle);
+export const nav = (elements, classOrStyle) => decorateWithStyle(createElement('nav', elements), classOrStyle);
 export const h1 = (elements, classes) => decorateWithStyle(createElement('h1', elements), classes);
 export const h2 = (elements, classes) => decorateWithStyle(createElement('h2', elements), classes);
 export const ul = (elements, classes) => decorateWithStyle(createElement('ul', elements), classes);
 export const li = (elements, classes) => decorateWithStyle(createElement('li', elements), classes);
 
 
+export const a = (href, elements, classOrStyle, attributes) => decorateWithAttributes(decorateWithStyle(createElement('a', elements), classOrStyle), { ...attributes, href });
 export const input = (classOrStyle, attributes) => decorateWithAttributes(decorateWithStyle(createElement('input'), classOrStyle), attributes);
 export const button = (elements, classOrStyle, attributes) => decorateWithAttributes(decorateWithStyle(createElement('button', elements), classOrStyle), attributes); 
