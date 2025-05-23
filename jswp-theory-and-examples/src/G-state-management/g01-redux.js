@@ -51,7 +51,7 @@ function userNameReducer(name = '', action) {
 const store = configureStore({
     reducer: {
         counter: counterReducer,
-        // myUser: userNameReducer
+        myUser: userNameReducer
     }
 });
 
