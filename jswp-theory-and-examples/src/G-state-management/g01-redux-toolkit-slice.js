@@ -27,7 +27,9 @@ const counterSlice = createSlice({
         decrement: (state) => {
             state--;
             return state;
-        }
+        },
+        cleanCounter: () => 0,
+        incrementBy: (state, { payload = 0 }) => state + payload//(action.payload || 0)
     }
 })
 
@@ -38,7 +40,7 @@ const store = configureStore({
 });
 
 // ACTIONS:
-const { increment, decrement } = counterSlice.actions;
+const { increment, decrement, cleanCounter, incrementBy } = counterSlice.actions;
 
 // SELECTORS:
 const selectCounter = (state) => state[counterSlice.name];
@@ -50,6 +52,8 @@ store.subscribe(() => {
 
 store.dispatch(increment());
 store.dispatch(increment());
+store.dispatch(cleanCounter());
 store.dispatch(increment());
 store.dispatch(increment());
+store.dispatch(incrementBy(500));
 store.dispatch(decrement());
