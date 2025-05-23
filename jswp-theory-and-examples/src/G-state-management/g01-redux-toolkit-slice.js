@@ -13,6 +13,9 @@
 
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
+// cleanCounter -> zeruje counter
+// incrementBy -> zwiększa o, wyznaczoną przez nas wartość counter.
+
 const counterSlice = createSlice({
     name: 'counter',
     initialState: 0,

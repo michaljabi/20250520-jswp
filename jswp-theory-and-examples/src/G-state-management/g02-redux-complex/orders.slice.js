@@ -14,6 +14,8 @@ export const ordersSlice = createSlice({
     }
 })
 
+export const { addNew } = ordersSlice;
+
 // Selektor, zwykła funkcja - wyciągająca daną część stanu
 // może ew. mapować / przerabiać / przeliczać na potrzeby prezentacji danych
 export const selectAllOrders = (state) => state[ordersSlice.name].items
