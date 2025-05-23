@@ -4,6 +4,7 @@ import { IncrementButton } from "../../shared/increment-button.component";
 import { NavBar } from "../../shared/nav-bar.component";
 import { PageHeader } from "../../shared/page-header.component";
 import { usersService } from "../users/users.service";
+import { LabContainerCounter } from "./lab-container-counter.component";
 
 export function LabsPage() {
 
@@ -21,6 +22,7 @@ export function LabsPage() {
         div([
             NavBar(),
             h2Ref,
+            LabContainerCounter(),
             renderIf(usersService.isAuth(), () => div('Hello you see me now..')),
             renderIf(usersService.isAuth(), IncrementButton)
         ], 'container')
