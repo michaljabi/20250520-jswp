@@ -5,6 +5,24 @@ import { LabsPage } from "./app/labs/labs.page";
 
 export const router = createBrowserHistory();
 
+export function useLinkTo(element: HTMLElement, link: string) {
+  element.addEventListener("click", (ev: MouseEvent) => {
+    router.push(link);
+  });
+  return element;
+}
+
+export function withNavLinkTo(element: HTMLAnchorElement) {
+  element.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    const href = element.getAttribute("href");
+    if (href) {
+      router.push(href);
+    }
+  });
+  return element;
+}
+
 const app = document.querySelector<HTMLDivElement>("#app");
 
 router.listen(({ location }) => {

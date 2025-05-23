@@ -1,6 +1,12 @@
 import { a, div, nav, button, ul, span, li } from "../common/dom-elements";
+import { router, withNavLinkTo } from "../router";
 
 export function NavBar() {
+
+    // aHome.addEventListener('click', ev => {
+    //     ev.preventDefault();
+    //     router.push(aHome.getAttribute('href'))
+    // })
 
     return nav([
         button([
@@ -9,13 +15,13 @@ export function NavBar() {
         div([
             ul([
                 li([
-                    a('/', 'Home', 'nav-link')
+                    withNavLinkTo(a('/', 'Home', 'nav-link'))
                 ], 'nav-item'),
                 li([
-                    a('/guests', 'Lista Gości', 'nav-link')
+                    withNavLinkTo(a('/guests', 'Lista Gości', 'nav-link'))
                 ], 'nav-item'),
                 li([
-                    a('/labs', 'Lab testy', 'nav-link')
+                    withNavLinkTo(a('/labs', 'Lab testy', 'nav-link'))
                 ], 'nav-item')
             ], 'navbar-nav')
         ], 'collapse navbar-collapse show'),
