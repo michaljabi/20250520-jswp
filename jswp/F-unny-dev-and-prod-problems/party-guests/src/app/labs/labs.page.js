@@ -10,8 +10,8 @@ export function LabsPage() {
     // w zależności od tego czy ktoś jest zalogowany czy nie
     const h2Ref = h2('');
 
-    usersService.getUser().subscribe(({ isAuth }) => {
-        h2Ref.innerText = isAuth ? 'Welcome in LABS' : 'please... log in...';
+    usersService.isAuth().subscribe((auth) => {
+        h2Ref.innerText = auth ? 'Welcome in LABS' : 'please... log in...';
     })
 
     return div([
