@@ -23,7 +23,7 @@
     </ul>
   </div>
   <div class="text-light">
-    <a class="btn btn-primary"> Zalogouj </a>
+    <a class="btn btn-primary"> Zaloguj </a>
   </div>
 </nav>
 ```
