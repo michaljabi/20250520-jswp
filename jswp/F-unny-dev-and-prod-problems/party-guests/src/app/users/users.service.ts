@@ -19,6 +19,7 @@ export const usersService = {
   },
   // computed state:
   isAuth() {
+    // const isAuth = computed(u => u.isAuth) (w Vue.js)
     return user$.pipe(map((u) => u.isAuth));
   },
   // ---
